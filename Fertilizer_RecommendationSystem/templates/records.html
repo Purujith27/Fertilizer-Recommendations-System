@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Records - AgriSmart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🌱 AgriSmart</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/predict">Predict</a></li>
+            <li><a href="/records">Records</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Prediction Records</h1>
+        
+        <div class="section-card">
+            {% if records %}
+            <div class="table-container">
+                <table class="records-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date/Time</th>
+                            <th>Temp (°C)</th>
+                            <th>Humidity (%)</th>
+                            <th>Moisture (%)</th>
+                            <th>Soil Type</th>
+                            <th>Crop Type</th>
+                            <th>N (kg/ha)</th>
+                            <th>K (kg/ha)</th>
+                            <th>P (kg/ha)</th>
+                            <th>Recommended Fertilizer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in records %}
+                        <tr>
+                            <td><strong>#{{ row[0] }}</strong></td>
+                            <td>Just now</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                            <td>{{ row[4] }}</td>
+                            <td>{{ row[5] }}</td>
+                            <td>{{ row[6] }}</td>
+                            <td>{{ row[7] }}</td>
+                            <td>{{ row[8] }}</td>
+                            <td class="fertilizer-cell">
+                                <strong>{{ row[9] }}</strong>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p style="text-align:center; color:#888; padding:40px;">
+                No predictions yet. Make your first recommendation!
+            </p>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer>
+        Internship Final Project • AgriSmart 2026
+    </footer>
+</body>
+</html> 
