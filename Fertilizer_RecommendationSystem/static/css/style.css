@@ -1,0 +1,283 @@
+/* AgriSmart - Professional Dark + Neon Green Theme */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: #e0e0e0;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    background: rgba(10, 10, 10, 0.98);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00ff88;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.1);
+}
+
+.logo {
+    font-size: 1.9rem;
+    font-weight: bold;
+    color: #00ff88;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: #00ff88;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: #00ff88;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Fixed Top-Right Alignment */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 0;
+    flex: 1;
+}
+.hero {
+    text-align: center;
+    padding: 100px 30px;
+    background: linear-gradient(rgba(10, 30, 20, 0.92), rgba(10, 30, 20, 0.92)),
+                url('https://source.unsplash.com/1600x900/?agriculture,crops,farmer') center/cover no-repeat;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.25);
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 18px;
+    z-index: 1;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
+}
+
+.main-title {
+    font-size: 3.2rem;
+    margin-bottom: 20px;
+    color: #00ff88;
+    text-shadow: 0 0 25px rgba(0, 255, 136, 0.7);
+}
+
+.subtitle {
+    font-size: 1.35rem;
+    margin-bottom: 35px;
+    color: #ddd;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cta-button {
+    display: inline-block;
+    background: #00ff88;
+    color: #0a0a0a;
+    padding: 16px 45px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.4s;
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.7);
+}
+
+.cta-button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.9);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.feature-card {
+    background: #161616;
+    border: 1px solid #00ff88;
+    border-radius: 15px;
+    padding: 30px 25px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 30px rgba(0, 255, 136, 0.15);
+}
+
+/* Rest of your existing styles (forms, table, etc.) */
+.page-title, .section-card, .result, table, .tech-stack, footer {
+    /* Your previous styles remain the same */
+}
+
+/* Keep all other styles from before (predict form, table, etc.) */
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; color: #00ff88; font-weight: 500; }
+
+input[type="number"], input[type="text"] {
+    width: 100%; padding: 12px 15px; background: #222; border: 1px solid #00ff88;
+    border-radius: 8px; color: #e0e0e0; font-size: 1rem;
+}
+
+input:focus {
+    outline: none; border-color: #00cc6a; box-shadow: 0 0 8px rgba(0,255,136,0.5);
+}
+
+button {
+    width: 100%; padding: 15px; background: linear-gradient(90deg, #00ff88, #00cc6a);
+    color: #0a0a0a; border: none; border-radius: 8px; font-size: 1.1rem;
+    font-weight: bold; cursor: pointer; margin-top: 10px;
+}
+
+button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,255,136,0.4); }
+
+.result { margin-top: 30px; padding: 25px; background: #0f2a1f; border: 2px solid #00ff88; border-radius: 12px; text-align: center; }
+.recommendation { font-size: 2.2rem; color: #00ff88; font-weight: bold; }
+
+footer {
+    text-align: center; padding: 20px; background: #0a0a0a; color: #666;
+    border-top: 1px solid #00ff88; margin-top: auto;
+}
+
+/* Responsive Fix for Top Right */
+@media (max-width: 768px) {
+    .navbar { flex-direction: column; gap: 15px; padding: 1rem; }
+    .nav-links { gap: 1.5rem; }
+    .main-title { font-size: 2.4rem; }
+} 
+.feature-list {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+    color: #ddd;
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+}
+
+ol.feature-list {
+    counter-reset: item;
+}
+
+ol.feature-list li {
+    counter-increment: item;
+    padding-left: 30px;
+    position: relative;
+}
+
+ol.feature-list li::before {
+    content: counter(item) ". ";
+    position: absolute;
+    left: 0;
+    color: #00ff88;
+    font-weight: bold;
+}
+/* Professional Records Table */
+.table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+.records-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #161616;
+    border: 1px solid #00ff88;
+}
+
+.records-table th {
+    background: linear-gradient(90deg, #00ff88, #00cc6a);
+    color: #0a0a0a;
+    font-weight: 700;
+    padding: 16px 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+.records-table td {
+    padding: 14px 10px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+    color: #e0e0e0;
+}
+
+.records-table tr:hover {
+    background: #1f2a1f;
+    transition: all 0.3s;
+}
+
+.fertilizer-cell {
+    font-size: 1.1rem;
+    color: #00ff88;
+    font-weight: bold;
+}
+
+.fertilizer-cell strong {
+    background: rgba(0, 255, 136, 0.1);
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #00ff88;
+} 
