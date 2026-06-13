@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict Fertilizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">🌱 AgriSmart</div>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/predict">Predict</a></li>
+        <li><a href="/records">Records</a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+</nav>
+<div class="container">
+    <h1 class="page-title">
+        Fertilizer Recommendation
+    </h1>
+    <div class="section-card">
+        <form method="POST">
+            <input type="number" step="0.1" name="temperature" placeholder="Temperature" required>
+            <input type="number" step="0.1" name="humidity" placeholder="Humidity" required>
+            <input type="number" step="0.1" name="moisture" placeholder="Moisture" required>
+            <input type="text" name="soil_type" placeholder="Soil Type" required>
+            <input type="text" name="crop_type" placeholder="Crop Type" required>
+            <input type="number" step="0.1" name="nitrogen" placeholder="Nitrogen" required>
+            <input type="number" step="0.1" name="potassium" placeholder="Potassium" required>
+            <input type="number" step="0.1" name="phosphorous" placeholder="Phosphorous" required>
+            <button type="submit">
+                Predict Fertilizer
+            </button>
+        </form>
+        {% if prediction %}
+        <div class="result">
+            <h2>Recommended Fertilizer</h2>
+            <h1>{{ prediction }}</h1>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<footer>
+    Internship Final Project
+</footer>
+</body>
+</html>
