@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About - AgriSmart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🌱 AgriSmart</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/predict">Predict</a></li>
+            <li><a href="/records">Records</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">About the Project</h1>
+
+        <div class="section-card">
+            <h2>Project Overview</h2>
+            <p>
+                AgriSmart is an intelligent Fertilizer Recommendation System developed to assist farmers and 
+                agronomists in making precise, data-driven decisions. By leveraging Machine Learning and modern 
+                web technologies, the system analyzes key environmental and soil parameters — including temperature, 
+                humidity, moisture, soil type, crop type, and essential nutrients (Nitrogen, Phosphorus, Potassium) — 
+                to recommend the most suitable fertilizer. 
+            </p>
+            <p>
+                The goal is to optimize crop yield, minimize fertilizer overuse, reduce environmental impact, 
+                and promote sustainable agriculture practices. This project was built as a complete end-to-end 
+                demonstration for an internship, showcasing full-stack development, database management, and 
+                deployment of a machine learning model in a production-like web application.
+            </p>
+        </div>
+
+        <div class="section-card">
+            <h2>Problem Statement</h2>
+            <p>
+                Traditional fertilizer application often relies on guesswork or generalized guidelines, leading to 
+                over-fertilization, soil degradation, increased costs, and environmental pollution (e.g., water contamination 
+                due to nutrient runoff). Farmers need a smart, accessible tool that provides personalized recommendations 
+                based on real-time field conditions.
+            </p>
+        </div>
+
+        <div class="section-card">
+            <h2>Objectives</h2>
+            <ul class="feature-list">
+                <li>✅ Deliver accurate fertilizer recommendations using a trained ML model</li>
+                <li>✅ Build a responsive, user-friendly web interface for easy adoption by farmers</li>
+                <li>✅ Implement persistent storage of all predictions using SQLite for future analysis</li>
+                <li>✅ Promote sustainable farming by reducing chemical waste and improving yield efficiency</li>
+                <li>✅ Demonstrate full-stack development skills: Backend (Flask), Frontend (HTML/CSS), ML Integration, and Database</li>
+                <li>✅ Create a professional portfolio project suitable for internship evaluation and job applications</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2>Methodology &amp; How It Works</h2>
+            <ol class="feature-list">
+                <li><strong>Data Collection &amp; Preprocessing:</strong> Used agricultural datasets containing soil and weather parameters.</li>
+                <li><strong>Model Training:</strong> Trained a classification model (Random Forest / similar) using scikit-learn to predict optimal fertilizer type.</li>
+                <li><strong>Web Development:</strong> Built with Flask framework for backend logic and routing.</li>
+                <li><strong>Frontend Design:</strong> Modern dark theme with neon green accents for a professional agricultural feel.</li>
+                <li><strong>Database Integration:</strong> SQLite stores every user prediction with full details for history tracking.</li>
+                <li><strong>Deployment:</strong> Local server with debug mode, easily deployable to platforms like Heroku or Render.</li>
+            </ol>
+        </div>
+
+        <div class="section-card">
+            <h2>Key Features</h2>
+            <ul class="feature-list">
+                <li>🔮 <strong>ML-Powered Engine</strong> — Real-time predictions based on 6+ input parameters</li>
+                <li>💾 <strong>Complete Prediction History</strong> — View, track, and analyze past recommendations</li>
+                <li>📱 <strong>Responsive UI/UX</strong> — Works perfectly on desktop, laptop, and mobile devices</li>
+                <li>🌍 <strong>Sustainability Focus</strong> — Encourages precise fertilizer usage for eco-friendly farming</li>
+                <li>⚡ <strong>Fast Performance</strong> — Lightweight Flask backend with quick response times</li>
+                <li>🔒 <strong>Error Handling &amp; Validation</strong> — Robust input validation and user feedback</li>
+            </ul>
+        </div>
+
+        <div class="tech-stack">
+            <div class="stack-card">Python</div>
+            <div class="stack-card">Flask</div>
+            <div class="stack-card">SQLite3</div>
+            <div class="stack-card">scikit-learn</div>
+            <div class="stack-card">Pandas</div>
+            <div class="stack-card">Joblib / Pickle</div>
+            <div class="stack-card">HTML5 + Jinja2</div>
+            <div class="stack-card">CSS3 (Neon Dark Theme)</div>
+        </div>
+
+        <div class="section-card">
+            <h2>Benefits &amp; Impact</h2>
+            <ul class="feature-list">
+                <li>Increased crop productivity through precise nutrient management</li>
+                <li>Reduced input costs for farmers</li>
+                <li>Lower environmental footprint from optimized fertilizer application</li>
+                <li>Easy-to-use digital tool suitable for small and large-scale farmers</li>
+                <li>Excellent learning demonstration of AI + Web Development integration</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2>Future Enhancements</h2>
+            <ul class="feature-list">
+                <li>Real-time integration with IoT soil sensors</li>
+                <li>Crop yield forecasting module</li>
+                <li>PDF/Excel report generation and export</li>
+                <li>Multi-language support (Hindi, regional languages)</li>
+                <li>Advanced visualizations using Matplotlib / Plotly</li>
+                <li>User authentication and multiple farmer profiles</li>
+                <li>Cloud deployment with Docker support</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2>Developed By</h2>
+            <p>
+                This project was developed as part of an internship program. 
+                It showcases proficiency in Python web development, Machine Learning, 
+                and creating production-ready full-stack applications.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        Internship Final Project • AgriSmart 2026
+    </footer>
+</body>
+</html>
