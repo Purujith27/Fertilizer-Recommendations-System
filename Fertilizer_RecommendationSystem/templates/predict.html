@@ -1,33 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Predict Fertilizer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>...</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 <body>
 <nav class="navbar">
     <div class="logo">🌱 AgriSmart</div>
-    <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/predict">Predict</a></li>
-        <li><a href="/records">Records</a></li>
-        <li><a href="/about">About</a></li>
-    </ul>
+   <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/predict">Predict</a></li>
+    <li><a href="/dashboard">Dashboard</a></li>
+    <li><a href="/analytics">Analytics</a></li>
+    <li><a href="/records">Records</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+</ul>
 </nav>
 <div class="container">
     <h1 class="page-title">
         Fertilizer Recommendation
     </h1>
-    <div class="section-card">
+
+    <div class="section-card predict-card">
+        <div class="predict-header">
+            <p class="section-note">
+                Use accurate measurements for temperature, humidity, moisture, and nutrient levels. 
+            </p>
+        </div>
         <form method="POST">
-            <input type="number" step="0.1" name="temperature" placeholder="Temperature" required>
-            <input type="number" step="0.1" name="humidity" placeholder="Humidity" required>
-            <input type="number" step="0.1" name="moisture" placeholder="Moisture" required>
-            <input type="text" name="soil_type" placeholder="Soil Type" required>
-            <input type="text" name="crop_type" placeholder="Crop Type" required>
-            <input type="number" step="0.1" name="nitrogen" placeholder="Nitrogen" required>
-            <input type="number" step="0.1" name="potassium" placeholder="Potassium" required>
-            <input type="number" step="0.1" name="phosphorous" placeholder="Phosphorous" required>
+            <div class="form-grid">
+                <label>
+                    <span>Temperature (°C)</span>
+                    <input type="number" step="0.1" name="temperature" placeholder="e.g. 28.4" required>
+                </label>
+                <label>
+                    <span>Humidity (%)</span>
+                    <input type="number" step="0.1" name="humidity" placeholder="e.g. 72" required>
+                </label>
+                <label>
+                    <span>Moisture (%)</span>
+                    <input type="number" step="0.1" name="moisture" placeholder="e.g. 45" required>
+                </label>
+                <label>
+                    <span>Soil Type</span>
+                    <select name="soil_type">
+                        <option>Black</option>
+                        <option>Clayey</option>
+                        <option>Loamy</option>
+                        <option>Red</option>
+                        <option>Sandy</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Crop Type</span>
+                    <select name="crop_type">
+                        <option>Rice</option>
+                        <option>Wheat</option>
+                        <option>Cotton</option>
+                        <option>Maize</option>
+                        <option>Sugarcane</option>
+                        <option>Tobacco</option>
+                        <option>Pulses</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Nitrogen (N)</span>
+                    <input type="number" step="0.1" name="nitrogen" placeholder="e.g. 30" required>
+                </label>
+                <label>
+                    <span>Potassium (K)</span>
+                    <input type="number" step="0.1" name="potassium" placeholder="e.g. 20" required>
+                </label>
+                <label>
+                    <span>Phosphorous (P)</span>
+                    <input type="number" step="0.1" name="phosphorous" placeholder="e.g. 35" required>
+                </label>
+            </div>
             <button type="submit">
                 Predict Fertilizer
             </button>
