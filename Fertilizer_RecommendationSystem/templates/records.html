@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Records - AgriSmart</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>...</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">🌱 AgriSmart</div>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/predict">Predict</a></li>
-            <li><a href="/records">Records</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
+       <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/predict">Predict</a></li>
+    <li><a href="/dashboard">Dashboard</a></li>
+    <li><a href="/analytics">Analytics</a></li>
+    <li><a href="/records">Records</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+</ul>
     </nav>
-
+    
     <div class="container">
         <h1 class="page-title">Prediction Records</h1>
         
@@ -41,7 +51,7 @@
                         {% for row in records %}
                         <tr>
                             <td><strong>#{{ row[0] }}</strong></td>
-                            <td>Just now</td>
+                            <td>{{ row[10] }}</td>
                             <td>{{ row[1] }}</td>
                             <td>{{ row[2] }}</td>
                             <td>{{ row[3] }}</td>
