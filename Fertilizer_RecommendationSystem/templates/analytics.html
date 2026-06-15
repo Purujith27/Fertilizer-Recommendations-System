@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>...</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">🌾 AgriSmart AI</div>
+
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/predict">Predict</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/analytics">Analytics</a></li>
+        <li><a href="/records">Records</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+   <h1 class="page-title">
+    Fertilizer Analytics
+</h1> 
+
+    <!-- KPI CARDS -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3>Average Nitrogen</h3>
+            <h1>{{ avg_n }}</h1>
+        </div>
+
+        <div class="stat-card">
+            <h3>Average Phosphorous</h3>
+            <h1>{{ avg_p }}</h1>
+        </div>
+
+        <div class="stat-card">
+            <h3>Average Potassium</h3>
+            <h1>{{ avg_k }}</h1>
+        </div>
+
+    </div>
+
+    <!-- BAR CHART -->
+
+    <div class="section-card">
+
+        <h2 style="margin-bottom:20px;">
+            Fertilizer Recommendation Distribution
+        </h2>
+
+        <canvas id="barChart"></canvas>
+
+    </div>
+
+    <!-- PIE CHART -->
+
+    <div class="section-card">
+
+        <h2 style="margin-bottom:20px;">
+            Fertilizer Share Analysis
+        </h2>
+
+        <canvas id="pieChart"></canvas>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="section-card">
+
+        <h2 style="margin-bottom:20px;">
+            Recommendation Statistics
+        </h2>
+
+        <table class="records-table">
+
+            <thead>
+                <tr>
+                    <th>Fertilizer</th>
+                    <th>Total Recommendations</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for fertilizer,count in fertilizer_data %}
+
+                <tr>
+                    <td>{{ fertilizer }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+const labels = {{ labels | tojson }};
+const counts = {{ counts | tojson }};
+
+// BAR CHART
+
+new Chart(
+    document.getElementById('barChart'),
+    {
+        type: 'bar',
+
+        data: {
+            labels: labels,
+
+            datasets: [{
+                label: 'Recommendations',
+                data: counts,
+                borderWidth: 1
+            }]
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+                legend: {
+                    display: true
+                }
+            },
+
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    }
+);
+
+
+// PIE CHART
+
+new Chart(
+    document.getElementById('pieChart'),
+    {
+        type: 'pie',
+
+        data: {
+            labels: labels,
+
+            datasets: [{
+                data: counts
+            }]
+        },
+
+        options: {
+            responsive: true
+        }
+    }
+);
+
+</script>
+
+<footer>
+    Internship Final Project • AgriSmart AI 2026
+</footer>
+
+</body>
+</html>
