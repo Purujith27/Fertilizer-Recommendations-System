@@ -11,7 +11,7 @@ app.secret_key = "fertilizer123"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "fertilizer.db")
 MODEL_PATH = os.path.join(BASE_DIR, "models", "tuned_model.pkl")
-DATASET_PATH = os.path.join(BASE_DIR, "..", "Project", "Fertilizer Prediction.csv")
+DATASET_PATH = os.path.join(BASE_DIR,"Fertilizer Prediction.csv")
 
 # Prepare label encoders for categorical features so inference matches training
 soil_le = None
@@ -36,19 +36,20 @@ def create_database():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS predictions(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        temperature REAL,
-        humidity REAL,
-        moisture REAL,
-        soil_type TEXT,
-        crop_type TEXT,
-        nitrogen REAL,
-        potassium REAL,
-        phosphorous REAL,
-        fertilizer TEXT
-    )
-    """)
+CREATE TABLE IF NOT EXISTS predictions(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    temperature REAL,
+    humidity REAL,
+    moisture REAL,
+    soil_type TEXT,
+    crop_type TEXT,
+    nitrogen REAL,
+    potassium REAL,
+    phosphorous REAL,
+    fertilizer TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+""")
     conn.commit()
     conn.close()
 
@@ -62,6 +63,10 @@ if os.path.exists(MODEL_PATH):
     try:
         model = joblib.load(MODEL_PATH)
         print("✅ Model Loaded Successfully!")
+
+        if hasattr(model, "classes_"):
+            print("Classes:", model.classes_)
+
     except Exception as e:
         print("❌ Model load failed:", e)
 else:
@@ -69,14 +74,13 @@ else:
 
 # Fertilizer Name Mapping (for model predictions)
 fertilizer_map = {
-    0: "Urea",
-    1: "DAP",
-    2: "14-35-14",
-    3: "28-28",
-    4: "17-17-17",
-    5: "20-20",
-    6: "10-26-26",
-    7: "MOP"
+    0: "10-26-26",
+    1: "14-35-14",
+    2: "17-17-17",
+    3: "20-20",
+    4: "28-28",
+    5: "DAP",
+    6: "Urea"
 }
 
 # Simple rule-based fallback
@@ -88,10 +92,6 @@ def get_fertilizer_recommendation(temp, hum, moist, n, k, p):
     # High Phosphorus → DAP
     elif p >= 40:
         return "DAP"
-    
-    # High Potassium → MOP
-    elif k >= 35:
-        return "MOP"
     
     # Balanced NPK → 17-17-17 or 20-20
     elif n >= 20 and p >= 20 and k >= 15:
@@ -211,11 +211,11 @@ def predict():
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute("""
-            INSERT INTO predictions 
-            (temperature, humidity, moisture, soil_type, crop_type, 
-             nitrogen, potassium, phosphorous, fertilizer)
-            VALUES (?,?,?,?,?,?,?,?,?)
-            """, (
+INSERT INTO predictions
+(temperature, humidity, moisture, soil_type, crop_type,
+ nitrogen, potassium, phosphorous, fertilizer, created_at)
+VALUES (?,?,?,?,?,?,?,?,?, datetime('now','localtime'))
+""", (
                 temperature, humidity, moisture, soil_type, crop_type,
                 nitrogen, potassium, phosphorous, prediction
             ))
@@ -229,6 +229,87 @@ def predict():
             print("Error:", e)
 
     return render_template("predict.html", prediction=prediction)
+@app.route("/dashboard")
+def dashboard():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM predictions")
+    total_predictions = cursor.fetchone()[0]
+
+    cursor.execute("SELECT AVG(temperature) FROM predictions")
+    avg_temp = round(cursor.fetchone()[0] or 0, 1)
+
+    cursor.execute("SELECT AVG(humidity) FROM predictions")
+    avg_humidity = round(cursor.fetchone()[0] or 0, 1)
+
+    cursor.execute("SELECT AVG(moisture) FROM predictions")
+    avg_moisture = round(cursor.fetchone()[0] or 0, 1)
+
+    cursor.execute("""
+        SELECT fertilizer, COUNT(*)
+        FROM predictions
+        GROUP BY fertilizer
+        ORDER BY COUNT(*) DESC
+        LIMIT 1
+    """)
+    result = cursor.fetchone()
+    top_fertilizer = result[0] if result else "N/A"
+
+    conn.close()
+
+    return render_template(
+        "dashboard.html",
+        total_predictions=total_predictions,
+        avg_temp=round(avg_temp, 1),
+        avg_humidity=round(avg_humidity, 1),
+        avg_moisture=round(avg_moisture, 1),
+        top_fertilizer=top_fertilizer
+    )
+
+
+@app.route("/analytics")
+def analytics():
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT fertilizer, COUNT(*)
+        FROM predictions
+        GROUP BY fertilizer
+        ORDER BY COUNT(*) DESC
+    """)
+    fertilizer_data = cursor.fetchall()
+
+    cursor.execute("SELECT AVG(nitrogen) FROM predictions")
+    avg_n = round(cursor.fetchone()[0] or 0, 1)
+
+    cursor.execute("SELECT AVG(phosphorous) FROM predictions")
+    avg_p = round(cursor.fetchone()[0] or 0, 1)
+
+    cursor.execute("SELECT AVG(potassium) FROM predictions")
+    avg_k = round(cursor.fetchone()[0] or 0, 1)
+
+    conn.close()
+
+    labels = [row[0] for row in fertilizer_data]
+    counts = [row[1] for row in fertilizer_data]
+
+    return render_template(
+        "analytics.html",
+        fertilizer_data=fertilizer_data,
+        labels=labels,
+        counts=counts,
+        avg_n=avg_n,
+        avg_p=avg_p,
+        avg_k=avg_k,
+    ) 
+
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 if __name__ == "__main__":
     app.run(debug=True) 
